@@ -1,4 +1,11 @@
 export class Animal {
+    public get animalId(): number {
+        return this._animalId;
+    }
+    public set animalId(value: number) {
+        this._animalId = value;
+    }
+
     public get adoptable(): boolean {
         return this._adoptable;
     }
@@ -25,7 +32,7 @@ export class Animal {
     }
 
     constructor(
-        private _id: number,
+        private _animalId: number,
         private _name: string,
         private _type: string,
         private _age: number,

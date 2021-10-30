@@ -10,7 +10,15 @@
 
     <ul class="adoptable">
         <li *ngFor="let animal of adoptableAnimals; index as i">
-            {{animal}}
+            {{animal.animalId}} - {{animal.name}}: {{animal.age}}, {{animal.type}}. {{animal.adoptable}}
+            <button class="adopt" (click)="switchView()">Adopt</button>
         </li>
     </ul>
 </div>
+
+<div class="adopting" *ngIf="showAdoptionPage===true">
+    <input class="petId" type="number" [(ngModel)] = "petId" />
+    <input class="adopterName" type="text" [(ngModel)] = "adopterName" />
+    <button class="updateStatus" (click)="adopt()">Update status</button>
+</div>
+

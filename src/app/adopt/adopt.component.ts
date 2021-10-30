@@ -1,6 +1,7 @@
 import { AnimalAdoptionAPIServiceService } from './../animal-adoption-apiservice.service';
 import { Animal } from './../models/animal.model';
 import { Component, OnInit } from '@angular/core';
+import { Adopter } from '../models/adopter.model';
 
 @Component({
   selector: 'adopt',
@@ -12,6 +13,11 @@ export class AdoptComponent implements OnInit {
   startAge: number;
   endAge: number;
   type:string;
+
+  petId:number;
+  adopterName:string;
+
+  showAdoptionPage=false;
 
   animalsAvailable:Array<Animal>;
   adoptableAnimals:Array<Animal>;
@@ -25,19 +31,29 @@ export class AdoptComponent implements OnInit {
     this.startAge = 1;
     this.endAge = 100;
     this.type = '';
+    this.adopterName='';
+    this.petId=0;
    }
 
   ngOnInit(): void {
   }
 
   searchAnimals():void {
-    console.log(this.adoptableAnimals);
     this.animalAdoptionService.searchAnimals(this.startAge,this.endAge,this.type.toUpperCase()).subscribe(apiResponse => {
       this.adoptableAnimals = apiResponse;
     })
-    console.log(this.adoptableAnimals);
   }
 
+  switchView(): void {
+    if(this.showAdoptionPage) {
+      this.showAdoptionPage = false;
+    } else {
+      this.showAdoptionPage = true;
+    }
+  }
 
+  adopt():void {
+    this.animalAdoptionService.adoptAnimal(this.petId,new Adopter(this.adopterName,this.petId));
+  }
 
 }
