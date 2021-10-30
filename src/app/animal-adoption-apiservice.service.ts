@@ -3,6 +3,7 @@ import { Animal } from './models/animal.model';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Adopted } from './models/adopted.model';
 
 @Injectable({
   providedIn: 'root'
@@ -25,8 +26,8 @@ export class AnimalAdoptionAPIServiceService {
     return this.http.get<Animal[]>(this.baseUrl + '/adopt', httpOptions);
   }
 
-  adoptAnimal(id:number, adopter: Adopter): Observable<Adopter> {
-    return this.http.post<Adopter>(this.baseUrl + '/adopt' + id, adopter);
+  adoptAnimal(id:number, adopter: Adopter): Observable<Adopted> {
+    return this.http.post<Adopted>(this.baseUrl + '/adopt/' + id, adopter);
   }
 
 }

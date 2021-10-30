@@ -1,7 +1,9 @@
+import { Adopter } from './../models/adopter.model';
 import { AnimalAdoptionAPIServiceService } from './../animal-adoption-apiservice.service';
 import { Animal } from './../models/animal.model';
 import { Component, OnInit } from '@angular/core';
-import { Adopter } from '../models/adopter.model';
+import { Observable } from 'rxjs';
+import { Adopted } from '../models/adopted.model';
 
 @Component({
   selector: 'adopt',
@@ -19,8 +21,11 @@ export class AdoptComponent implements OnInit {
 
   showAdoptionPage=false;
 
+  animal: Animal | undefined;
+
   animalsAvailable:Array<Animal>;
   adoptableAnimals:Array<Animal>;
+  adopted:Adopted;
 
   constructor(private animalAdoptionService: AnimalAdoptionAPIServiceService) {
     this.animalsAvailable = new Array(new Animal(1,"Freckles","Dog",7,true),
@@ -33,6 +38,7 @@ export class AdoptComponent implements OnInit {
     this.type = '';
     this.adopterName='';
     this.petId=0;
+    this.adopted=new Adopted("",0,"");
    }
 
   ngOnInit(): void {
@@ -53,7 +59,9 @@ export class AdoptComponent implements OnInit {
   }
 
   adopt():void {
-    this.animalAdoptionService.adoptAnimal(this.petId,new Adopter(this.adopterName,this.petId));
+    this.animalAdoptionService.adoptAnimal(this.petId,new Adopter(this.adopterName,this.petId)).subscribe(apiResponse => {
+        this.adopted = apiResponse;
+      });
   }
 
 }

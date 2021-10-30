@@ -1,5 +1,10 @@
-export class Adopter {
-
+export class Adopted {
+    public get petName(): string {
+        return this._petName;
+    }
+    public set petName(value: string) {
+        this._petName = value;
+    }
     public get pet(): number {
         return this._pet;
     }
@@ -15,5 +20,6 @@ export class Adopter {
     constructor(
         private _name: string,
         private _pet: number,
+        private _petName: string
     ) {}
 }
