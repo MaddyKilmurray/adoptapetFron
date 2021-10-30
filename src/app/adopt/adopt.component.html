@@ -1,1 +1,16 @@
-<p>adopt works!</p>
+<div class="header">
+    <h2>Welcome to our Adoption Service!</h2>
+</div>
+
+<div class="search">
+    <input class="type" type="text" [(ngModel)] = "type" />
+    <input class="startAge" type="number" [(ngModel)] = "startAge" />
+    <input class="endAge" type="number" [(ngModel)] = "endAge" />
+    <button class="search" (click)="searchAnimals()">Search</button>
+
+    <ul class="adoptable">
+        <li *ngFor="let animal of adoptableAnimals; index as i">
+            {{animal}}
+        </li>
+    </ul>
+</div>
