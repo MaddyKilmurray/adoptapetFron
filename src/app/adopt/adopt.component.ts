@@ -2,7 +2,6 @@ import { Adopter } from './../models/adopter.model';
 import { AnimalAdoptionAPIServiceService } from './../animal-adoption-apiservice.service';
 import { Animal } from './../models/animal.model';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Adopted } from '../models/adopted.model';
 
 @Component({
@@ -16,8 +15,8 @@ export class AdoptComponent implements OnInit {
   endAge: number;
   type:string;
 
-  petId:number;
   adopterName:string;
+  petId:number;
 
   showAdoptionPage=false;
 
@@ -59,7 +58,7 @@ export class AdoptComponent implements OnInit {
   }
 
   adopt():void {
-    this.animalAdoptionService.adoptAnimal(this.petId,new Adopter(this.adopterName,this.petId)).subscribe(apiResponse => {
+    this.animalAdoptionService.adoptAnimal(new Adopter(this.adopterName,this.petId)).subscribe(apiResponse => {
         this.adopted = apiResponse;
       });
   }

@@ -26,8 +26,10 @@ export class AnimalAdoptionAPIServiceService {
     return this.http.get<Animal[]>(this.baseUrl + '/adopt', httpOptions);
   }
 
-  adoptAnimal(id:number, adopter: Adopter): Observable<Adopted> {
-    return this.http.post<Adopted>(this.baseUrl + '/adopt/' + id, adopter);
+  adoptAnimal(adopter: Adopter): Observable<Adopted> {
+    const body=JSON.stringify(adopter);
+    const headers = new HttpHeaders({ 'Content-Type': 'application/JSON' });  
+    return this.http.post<Adopted>(this.baseUrl + '/adopt', body,{'headers':headers});
   }
 
 }

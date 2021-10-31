@@ -1,5 +1,4 @@
 export class Adopter {
-
     public get pet(): number {
         return this._pet;
     }
@@ -12,6 +11,8 @@ export class Adopter {
     public set name(value: string) {
         this._name = value;
     }
+
+    
     constructor(
         private _name: string,
         private _pet: number,
